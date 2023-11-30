@@ -16,7 +16,7 @@ describe('Category Unit Tests', () => {
             expect(category.categoryId).toBeInstanceOf(Uuid);
             expect(category.name).toBe('Test Category');
             expect(category.description).toBeNull();
-            expect(category.createdAt).toBeInstanceOf(Date);       
+            expect(category.createdAt).toBeInstanceOf(Date);
         });
 
         test('should create a category with a name, description and createdAt', () => {
@@ -69,5 +69,87 @@ describe('Category Unit Tests', () => {
         expect(category.description).toBeNull();
         expect(category.createdAt).toBeInstanceOf(Date);
         expect(validadeSpy).toHaveBeenCalledTimes(1);
+    });
+});
+
+describe('Category Validation Tests', () => {
+
+    describe("create command", () => {
+        test('should an invalid category with name property', () => {
+
+            expect(() => Category.create({ name: null })).containsErrorMessages({
+                name: [
+                    "name should not be empty",
+                    "name must be a string",
+                    "name must be shorter than or equal to 255 characters",
+                ],
+            });
+
+
+            expect(() => Category.create({ name: "" })).containsErrorMessages({
+                name: ["name should not be empty"],
+            });
+
+            expect(() => Category.create({ name: 5 as any })).containsErrorMessages({
+                name: [
+                    "name must be a string",
+                    "name must be shorter than or equal to 255 characters",
+                ],
+            });
+
+            expect(() =>
+                Category.create({ name: "t".repeat(256) })
+            ).containsErrorMessages({
+                name: ["name must be shorter than or equal to 255 characters"],
+            });
+
+
+        });
+
+        test("should a invalid category using description property", () => {
+            expect(() =>
+                Category.create({ description: 5 } as any)
+            ).containsErrorMessages({
+                description: ["description must be a string"],
+            });
+        });
+    });
+
+
+    describe("changeName method", () => {
+        test("should a invalid category using name property", () => {
+            const category = Category.create({ name: "Movie" });
+            expect(() => category.changeName(null)).containsErrorMessages({
+                name: [
+                    "name should not be empty",
+                    "name must be a string",
+                    "name must be shorter than or equal to 255 characters",
+                ],
+            });
+
+            expect(() => category.changeName("")).containsErrorMessages({
+                name: ["name should not be empty"],
+            });
+
+            expect(() => category.changeName(5 as any)).containsErrorMessages({
+                name: [
+                    "name must be a string",
+                    "name must be shorter than or equal to 255 characters",
+                ],
+            });
+
+            expect(() => category.changeName("t".repeat(256))).containsErrorMessages({
+                name: ["name must be shorter than or equal to 255 characters"],
+            });
+        });
+    });
+
+    describe("changeDescription method", () => {
+        test("should a invalid category using description property", () => {
+            const category = Category.create({ name: "Movie" });
+            expect(() => category.changeDescription(5 as any)).containsErrorMessages({
+                description: ["description must be a string"],
+            });
+        });
     });
 });
