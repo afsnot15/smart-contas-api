@@ -44,8 +44,8 @@ export abstract class InMemoryRepository<E extends Entity, EntityId extends Valu
         return typeof item === 'undefined' ? null : item;
     }
 
-    findAll(): Promise<E[]> {
-        throw new Error("Method not implemented.");
+    async findAll(): Promise<E[]> {
+        return this.items;
     }
 
     abstract getEntity(): new (...args: any[]) => E;
