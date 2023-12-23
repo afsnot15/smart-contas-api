@@ -19,12 +19,11 @@ export class SearchParams<Filter = string> extends ValueObject {
 
     constructor(props: SearchParamsConstructorProps<Filter> = {}) {
         super();
-        this._page = props.page;
-        this._per_page = props.per_page;
-        this._sort = props.sort;
-        this._sort_dir = props.sort_dir;
-        this._filter = props.filter;
-
+        this.page = props.page;
+        this.per_page = props.per_page;
+        this.sort = props.sort;
+        this.sort_dir = props.sort_dir;
+        this.filter = props.filter;
     }
 
     get page(): number {
@@ -41,7 +40,7 @@ export class SearchParams<Filter = string> extends ValueObject {
         this._page = _page;
     }
 
-    private get sort(): string | null {
+     get sort(): string | null {
         return this._sort;
     }
 
@@ -50,7 +49,7 @@ export class SearchParams<Filter = string> extends ValueObject {
             value === null || value === undefined || value === '' ? null : `${value}`;
     }
 
-    private get sort_dir(): SortDirection | null {
+    get sort_dir(): SortDirection | null {
         return this._sort_dir;
     }
 
@@ -68,8 +67,26 @@ export class SearchParams<Filter = string> extends ValueObject {
     }
 
     protected set filter(value: Filter | null) {
-        this._filter = 
-        value === null || value === undefined || (value as unknown) === '' ? null : (`${value}` as any);
+        this._filter =
+            value === null || value === undefined || (value as unknown) === '' ? null : (`${value}` as any);
+    }
+
+    get per_page() {
+        return this._per_page;
+    }
+
+    private set per_page(value: number) {
+        let _per_page = value === (true as any) ? this._per_page : +value;
+
+        if (
+            Number.isNaN(_per_page) ||
+            _per_page <= 0 ||
+            parseInt(_per_page as any) !== _per_page
+        ) {
+            _per_page = this._per_page;
+        }
+
+        this._per_page = _per_page;
     }
 }
 
