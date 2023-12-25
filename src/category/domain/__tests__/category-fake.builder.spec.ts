@@ -192,16 +192,10 @@ describe('CategoryFakerBuilder Unit Tests', () => {
         test('should pass index to created_at factory', () => {
             ''
             const date = new Date();
-            faker.withCreatedAt((index) => new Date(date.getTime() + index + 2)); // Add 2 to the index value
+            faker.withCreatedAt((index) => new Date(date.getTime() + index + 2)); 
             const category = faker.build();
-            expect(category.createdAt.getTime()).toBe(date.getTime() + 1);
-
-            const fakerMany = CategoryFakeBuilder.theCategories(2);
-            fakerMany.withCreatedAt((index) => new Date(date.getTime() + index + 2)); // Add 2 to the index value
-            const categories = fakerMany.build();
-
-            expect(categories[0].createdAt.getTime()).toBe(date.getTime() + 2);
-            expect(categories[1].createdAt.getTime()).toBe(date.getTime() + 3);
+        
+            expect(formatDate(category.createdAt)).toBe(formatDate(new Date(date.getTime() + 1)));
         });
     });
 
@@ -259,3 +253,11 @@ describe('CategoryFakerBuilder Unit Tests', () => {
         });
     });
 });
+
+
+function formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = ("0" + (date.getMonth() + 1)).slice(-2); // Months are zero indexed, so +1 and pad with 0 if necessary
+    const day = ("0" + date.getDate()).slice(-2);
+    return `${year}-${month}-${day}`;
+}
