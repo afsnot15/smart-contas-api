@@ -2,18 +2,12 @@
 import { CategoryModel } from "../category.model";
 import { DataType, Sequelize } from "sequelize-typescript";
 import { Category } from "../../../../domain/cateory.entity";
+import { setupSequelize } from "../../../../../shared/infra/testing/helpers";
 
 describe("CategoryModel Integration Test", () => {
-    let sequelize;
+    setupSequelize({ models: [CategoryModel] });
 
     test("should create a category", async () => {
-        sequelize = new Sequelize({
-            dialect: "sqlite",
-            storage: ":memory:",
-            models: [CategoryModel],
-        });
-
-        await sequelize.sync({ force: true });
         const category = Category.fake().aCategory().build();
 
         CategoryModel.create({
