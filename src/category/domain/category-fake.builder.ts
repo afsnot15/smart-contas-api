@@ -81,7 +81,7 @@ export class CategoryFakeBuilder<TBuild = any> {
           name: this.callFactory(this._name, index),
           description: this.callFactory(this._description, index),
           ...(this._created_at && {
-            created_at: this.callFactory(this._created_at, index),
+            createdAt: this.callFactory(this._created_at, index),
           }),
         });
         return category;

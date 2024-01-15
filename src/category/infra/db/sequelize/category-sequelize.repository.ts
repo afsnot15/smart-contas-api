@@ -20,9 +20,11 @@ export class CategorySequelizeRepository implements ICategoryRepository {
     }
 
     async bulkInsert(entities: Category[]): Promise<void> {
-        const models = entities.map((entity) => CategoryModelMapper.toModel(entity));
+        const models = entities.map((entity) =>
+            CategoryModelMapper.toModel(entity).toJSON()
+        );
 
-        await this.categoryModel.bulkCreate(models.map((m) => m.toJSON()));
+        await this.categoryModel.bulkCreate(models);
     }
 
     async update(entity: Category): Promise<void> {
@@ -55,7 +57,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
         const model = await this._get(entity_id.id);
 
         return model ? CategoryModelMapper.toEntity(model) : null;
-      
+
     }
 
     private async _get(pId: string) {
@@ -87,12 +89,9 @@ export class CategorySequelizeRepository implements ICategoryRepository {
         });
 
         return new CategorySearchResult({
-            items: models.map((model) => new Category({
-                categoryId: new Uuid(model.categoryId),
-                name: model.name,
-                description: model.description,
-                createdAt: model.createdAt,
-            })),
+            items: models.map((model) => {
+                return CategoryModelMapper.toEntity(model);
+            }),
             total: count,
             current_page: props.page,
             per_page: props.per_page,
