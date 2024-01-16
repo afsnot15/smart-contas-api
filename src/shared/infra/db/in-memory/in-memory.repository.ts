@@ -9,6 +9,7 @@ export abstract class InMemoryRepository<E extends Entity, EntityId extends Valu
     implements IRepository<E, EntityId> {
 
     items: E[] = [];
+    
     async insert(entity: E): Promise<void> {
         this.items.push(entity);
     }
