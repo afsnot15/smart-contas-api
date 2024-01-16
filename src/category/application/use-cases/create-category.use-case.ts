@@ -1,6 +1,7 @@
-import { IUseCase } from "../../shared/application/use-case.interface";
-import { ICategoryRepository } from "../domain/category.repository";
-import { Category } from "../domain/cateory.entity";
+import { IUseCase } from "../../../shared/application/use-case.interface";
+import { ICategoryRepository } from "../../domain/category.repository";
+import { Category } from "../../domain/cateory.entity";
+import { CategoryOutput } from "./common/category-output";
 
 export class CreateCategoryUseCase implements IUseCase<CreateCategoryInput, CreateCategoryOutput> {
 
@@ -13,7 +14,7 @@ export class CreateCategoryUseCase implements IUseCase<CreateCategoryInput, Crea
         await this.categoryRepository.insert(entity);
 
         return {
-            categoryId: entity.categoryId.id,
+            id: entity.categoryId.id,
             name: entity.name,
             description: entity.description,
             createdAt: entity.createdAt
@@ -26,10 +27,5 @@ export type CreateCategoryInput = {
     description: string;
 };
 
-export type CreateCategoryOutput = {
-    categoryId: string;
-    name: string;
-    description: string;
-    createdAt: Date;
-};
+export type CreateCategoryOutput = CategoryOutput;
 

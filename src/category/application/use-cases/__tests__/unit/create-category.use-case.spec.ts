@@ -1,4 +1,5 @@
-import { CategoryInMemoryRepository } from "../../../infra/db/in-memory/category-in-memory.repository";
+
+import { CategoryInMemoryRepository } from "../../../../infra/db/in-memory/category-in-memory.repository";
 import { CreateCategoryUseCase } from "../../create-category.use-case";
 
 describe('CreateCategoryUseCase Unit Test', () => {
@@ -18,7 +19,7 @@ describe('CreateCategoryUseCase Unit Test', () => {
         expect(spyInsert).toHaveBeenCalledTimes(1);
         
         expect(output).toStrictEqual({
-            categoryId: repository.items[0].categoryId.id,
+            id: repository.items[0].categoryId.id,
             name: 'test',
             description: null,
             createdAt: repository.items[0].createdAt,
@@ -32,7 +33,7 @@ describe('CreateCategoryUseCase Unit Test', () => {
         expect(spyInsert).toHaveBeenCalledTimes(2);
 
         expect(output).toStrictEqual({
-            categoryId: repository.items[1].categoryId.id,
+            id: repository.items[1].categoryId.id,
             name: 'test',
             description: 'some description',
             createdAt: repository.items[1].createdAt,
