@@ -8,7 +8,7 @@ export class CategoryInMemoryRepository
   extends InMemorySearchableRepository<Category, Uuid>
   implements ICategoryRepository
 {
-  sortableFields: string[] = ["name", "created_at"];
+  sortableFields: string[] = ["name", "createdAt"];
 
   protected async applyFilter(
     items: Category[],
@@ -33,6 +33,6 @@ export class CategoryInMemoryRepository
   ) {
     return sort
       ? super.applySort(items, sort, sort_dir)
-      : super.applySort(items, "created_at", "desc");
+      : super.applySort(items, "createdAt", "desc");
   }
 }

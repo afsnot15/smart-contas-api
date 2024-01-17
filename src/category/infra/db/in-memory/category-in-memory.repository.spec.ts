@@ -28,33 +28,33 @@ describe("CategoryInMemoryRepository", () => {
   });
 
   test("should sort by created_at when sort param is null", async () => {
-    const created_at = new Date();
+    const createdAt = new Date();
 
     const items = [
       Category.fake()
         .aCategory()
         .withName("test")
-        .withCreatedAt(created_at)
+        .withCreatedAt(createdAt)
         .build(),
       
         Category.fake()
         .aCategory()
         .withName("TEST")
-        .withCreatedAt(new Date(created_at.getTime() + 100))
+        .withCreatedAt(new Date(createdAt.getTime() + 100))
         .build(),
       
         Category.fake()
         .aCategory()
         .withName("fake")
-        .withCreatedAt(new Date(created_at.getTime() + 200))
+        .withCreatedAt(new Date(createdAt.getTime() + 200))
         .build(),
     ];
 
     const itemsSorted = await repository["applySort"](items, null, null);
-    expect(itemsSorted).toStrictEqual([items[0], items[1], items[2]]);
+    expect(itemsSorted).toStrictEqual([items[2], items[1], items[0]]);
   });
 
-  it("should sort by name", async () => {
+  test("should sort by name", async () => {
     const items = [
       Category.fake().aCategory().withName("c").build(),
       Category.fake().aCategory().withName("b").build(),
