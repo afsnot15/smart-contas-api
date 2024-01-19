@@ -2,7 +2,7 @@ import { Op } from "sequelize";
 import { NotFoundError } from "../../../../shared/domain/errors/not-found.error";
 import { Uuid } from "../../../../shared/domain/value-objects/uuid.vo";
 import { CategorySearchParams, CategorySearchResult, ICategoryRepository } from "../../../domain/category.repository";
-import { Category } from "../../../domain/cateory.entity";
+import { Category } from "../../../domain/category.entity";
 import { CategoryModel } from "./category.model";
 import { CategoryModelMapper } from "./category-model-mapper";
 

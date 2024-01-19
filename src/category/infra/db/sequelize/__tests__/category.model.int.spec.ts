@@ -1,7 +1,7 @@
 
 import { CategoryModel } from "../category.model";
 import { DataType, Sequelize } from "sequelize-typescript";
-import { Category } from "../../../../domain/cateory.entity";
+import { Category } from "../../../../domain/category.entity";
 import { setupSequelize } from "../../../../../shared/infra/testing/helpers";
 
 describe("CategoryModel Integration Test", () => {

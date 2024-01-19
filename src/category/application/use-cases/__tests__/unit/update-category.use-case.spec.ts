@@ -1,6 +1,6 @@
 import { NotFoundError } from "../../../../../shared/domain/errors/not-found.error";
 import { InvalidUuidError, Uuid } from "../../../../../shared/domain/value-objects/uuid.vo";
-import { Category } from "../../../../domain/cateory.entity";
+import { Category } from "../../../../domain/category.entity";
 import { CategoryInMemoryRepository } from "../../../../infra/db/in-memory/category-in-memory.repository";
 import { UpdateCategoryUseCase } from "../../update-category.use-case";
 
