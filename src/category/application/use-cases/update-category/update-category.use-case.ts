@@ -1,10 +1,10 @@
-import { IUseCase } from "../../../shared/application/use-case.interface";
-import { Uuid } from "../../../shared/domain/value-objects/uuid.vo";
-import { ICategoryRepository } from "../../domain/category.repository";
-import { Category } from "../../domain/category.entity";
-import { NotFoundError } from "../../../shared/domain/errors/not-found.error";
-import { CategoryOutput } from "./common/category-output";
-import { EntityValidationError } from "../../../shared/domain/validators/validation.error";
+import { IUseCase } from "../../../../shared/application/use-case.interface";
+import { Uuid } from "../../../../shared/domain/value-objects/uuid.vo";
+import { ICategoryRepository } from "../../../domain/category.repository";
+import { Category } from "../../../domain/category.entity";
+import { NotFoundError } from "../../../../shared/domain/errors/not-found.error";
+import { CategoryOutput } from "../common/category-output";
+import { EntityValidationError } from "../../../../shared/domain/validators/validation.error";
 
 export class UpdateCategoryUseCase implements IUseCase<UpdateCategoryInput, UpdateCategoryOutput>{
 
