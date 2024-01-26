@@ -46,5 +46,5 @@ export type UpdateCategoryInput = {
     description?: string;
 }
 
-export type GetCategoryOutput = CategoryOutput;
+export type UpdateCategoryOutput = CategoryOutput;
 
