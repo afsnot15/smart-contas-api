@@ -1,5 +1,5 @@
 import { CategoryModel } from '@core/category/infra/db/sequelize/category.model';
-import { Global, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 
 const models = [CategoryModel];
