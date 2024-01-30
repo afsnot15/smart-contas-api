@@ -11,7 +11,6 @@ const models = [CategoryModel];
             storage: ':memory:',
             logging: false,
             models,
-      
           }),
     ],
 })
