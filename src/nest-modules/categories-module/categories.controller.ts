@@ -6,6 +6,8 @@ import { UpdateCategoryUseCase } from '@core/category/application/use-cases/upda
 import { Body, Controller, Delete, Get, Inject, Param, Patch, Post } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import { CategoryPresenter } from './categories.presenter';
+import { CategoryOutput } from '@core/category/application/use-cases/common/category-output';
 
 @Controller('categories')
 export class CategoriesController {
@@ -26,8 +28,10 @@ export class CategoriesController {
   private listteUseCase: ListCategoriesUseCase;
 
   @Post()
-  create(@Body() createCategoryDto: CreateCategoryDto) {
-    return this.createUseCase.execute(createCategoryDto);
+  async create(@Body() createCategoryDto: CreateCategoryDto) {
+    const output = await this.createUseCase.execute(createCategoryDto);
+
+    return this.serialize(output);
   }
 
   @Get()
@@ -48,5 +52,9 @@ export class CategoriesController {
   @Delete(':id')
   remove(@Param('id') id: string) {
 
+  }
+
+  private serialize(output: CategoryOutput) {
+    return new CategoryPresenter(output);
   }
 }
