@@ -25,7 +25,7 @@ export class CategoriesController {
   private getUseCase: GetCategoryUseCase;
 
   @Inject(ListCategoriesUseCase)
-  private listteUseCase: ListCategoriesUseCase;
+  private listCategories: ListCategoriesUseCase;
 
   @Post()
   async create(@Body() createCategoryDto: CreateCategoryDto) {
