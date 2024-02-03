@@ -1,12 +1,11 @@
 import { CreateCategoryUseCase } from '@core/category/application/use-cases/create-category/create-category.use-case';
-import { UpdateCategoryUseCase } from '@core/category/application/use-cases/update-category/update-category.use-case';
-import { CategorySequelizeRepository } from '@core/category/infra/db/sequelize/category-sequelize.repository';
-import { Body, Controller, Delete, Get, Inject, Param, Patch, Post } from '@nestjs/common';
-import { CreateCategoryDto } from './dto/create-category.dto';
-import { UpdateCategoryDto } from './dto/update-category.dto';
 import { DeleteCategoryUseCase } from '@core/category/application/use-cases/delete-category/delete-category.use-case';
 import { GetCategoryUseCase } from '@core/category/application/use-cases/get-category/get-category.use-case';
 import { ListCategoriesUseCase } from '@core/category/application/use-cases/list-categories/list-categories.use-case';
+import { UpdateCategoryUseCase } from '@core/category/application/use-cases/update-category/update-category.use-case';
+import { Body, Controller, Delete, Get, Inject, Param, Patch, Post } from '@nestjs/common';
+import { CreateCategoryDto } from './dto/create-category.dto';
+import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Controller('categories')
 export class CategoriesController {
@@ -28,7 +27,7 @@ export class CategoriesController {
 
   @Post()
   create(@Body() createCategoryDto: CreateCategoryDto) {
-
+    return this.createUseCase.execute(createCategoryDto);
   }
 
   @Get()
